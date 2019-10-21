@@ -1,13 +1,18 @@
+/*
+Primary
+#00695F
+#009688
+#33AB9F
+
+Secondary
+#4615B2
+#651FFF
+#834BFF
+*/
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  text-align: center;
+  font-family: Arial, sans-serif;
 }
