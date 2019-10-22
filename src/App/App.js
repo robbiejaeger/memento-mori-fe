@@ -1,46 +1,43 @@
 import React, { Component } from 'react';
 import './App.scss';
-
-import firebase from 'firebase/app';
-import 'firebase/auth';
-
+import app from '../firebase';
 import Login from '../Login/Login';
 import Main from '../Main/Main';
+import Loader from '../Loader/Loader';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      isLoading: true
     };
   }
 
   componentDidMount() {
-    this.initializeAuth();
-    this.checkIfLoggedIn();
+    this.registerAuthObserver();
   }
 
-  initializeAuth = () => {
-    const firebaseConfig = {
-      apiKey: 'AIzaSyBvPeQMobRjWj20SrFuoJUSrMfMyLfdPL4',
-      authDomain: "memento-mori-8609a.firebaseapp.com",
-      projectId: 'memento-mori-8609a'
-    };
-
-    firebase.initializeApp(firebaseConfig);
+  registerAuthObserver() {
+    app.auth().onAuthStateChanged(
+        (user) => this.changeLoginState(!!user)
+    );
   }
 
-  checkIfLoggedIn = () => {
-    if (firebase.auth().currentUser) {
-      this.setState({isLoggedIn: true});
-    } else {
-      this.setState({isLoggedIn: false});
-    }
+  changeLoginState = loginState => {
+    this.setState({isLoggedIn: loginState, isLoading: false});
   }
 
   render() {
     const isLoggedIn = this.state.isLoggedIn;
-    const view = isLoggedIn ? <Main /> : <Login />;
+    const isLoading = this.state.isLoading;
+    let view;
+
+    if (isLoading) {
+      view = <Loader />;
+    } else {
+      view = isLoggedIn ? <Main /> : <Login />;
+    }
 
     return (
       <div className="App">
