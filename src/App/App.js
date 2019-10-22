@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import './App.scss';
+import Login from '../Login/Login';
+import Main from '../Main/Main';
 
 class App extends Component {
   constructor() {
+    super();
     this.state = {
-      isLoggedIn: false;
+      isLoggedIn: false
     };
   }
 
   render() {
     const isLoggedIn = this.state.isLoggedIn;
-    let view;
-
-    if (this.state.loggedIn) {
-      // view = <Login />;
-    } else {
-      // view = <Main />;
-    }
+    const view = isLoggedIn ? <Main /> : <Login />;
 
     return (
       <div className="App">
