@@ -1,4 +1,4 @@
-const applicationServerPublicKey = 'BC55I1Q9r_xqe9M0forl3l8bRqRPWa2fY43uaZS45ikGGrhOmwuKhhBQV2Ycv89f0vP48_TFur3Vs7rf9p93m0I'; // VAPID public key
+const applicationServerPublicKey = 'BHeDRim9JDOpnTUAfGZp2FfoA-3MAm_3RC-rql8YR8z0GfI1Oz1aXWPh6a1IrgxUPbTuk7wb49Wp5tbTYPADhlI'; // VAPID public key
 
 function requestNotificationsPermission() {
   return Notification.requestPermission()
@@ -8,28 +8,24 @@ function requestNotificationsPermission() {
     })
 }
 
-export function subscribeUser() {
-  requestNotificationsPermission()
+export function subscribeUser(uid) {
+  return requestNotificationsPermission()
     .then(result => {
       if (result === 'granted' && 'serviceWorker' in navigator) {
-        navigator.serviceWorker.ready.then(function(reg) {
-
-          reg.pushManager.subscribe({
+        return navigator.serviceWorker.ready.then(function(reg) {
+          return reg.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: applicationServerPublicKey
           }).then(function(subscription) {
-            console.log(subscription);
-            // const uid = getUidForLoggedInUser();
-            // submitOrUpdateSubscriptionOnServer(uid, subscription);
-            // console.log('Subscription object:', subscription);
+            return submitOrUpdateSubscriptionOnServer(uid, subscription);
           }).catch(function(err) {
-            // if (Notification.permission === 'denied') {
-            //   userInfoMsg.textContent = 'This page has notifications disabled. Turn notificaions on.';
-            //   console.warn('Permission for notifications was denied');
-            // } else {
-            //   userInfoMsg.textContent = 'Unable to subscribe to notifications for this device.';
-            //   console.error('Unable to subscribe to push:', err);
-            // }
+            if (Notification.permission === 'denied') {
+              console.warn('Permission for notifications was denied');
+              return 'This page has notifications disabled. Turn notifications on.';
+            } else {
+              console.error('Unable to subscribe to push:', err);
+              return 'Unable to subscribe to notifications for this device.';
+            }
           });
         });
       }
@@ -37,4 +33,26 @@ export function subscribeUser() {
     .catch(err => {
       console.error('Something went wrong with notification permission request:', err);
     });
+}
+
+function submitOrUpdateSubscriptionOnServer(uid, subscription) {
+  return fetch('http://localhost:3001/subscriptions', {
+    method: 'POST',
+    body: JSON.stringify({ uid, subscription }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(function(response) {
+    if (response.ok) {
+      response.json().then(function(message) { console.log(message); });
+      return 'Your device has been signed up to be reminded!';
+    } else {
+      response.json().then(function(message) { console.log('Error:', message); });
+      return 'Something went wrong with your reminder...';
+    }
+  })
+  .catch(function(err) {
+    console.error('Posting subscription failed:', err);
+  });
 }
