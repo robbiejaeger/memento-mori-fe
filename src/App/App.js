@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
-import app from '../firebase';
 import Login from '../Login/Login';
 import Main from '../Main/Main';
 import Loader from '../Loader/Loader';
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 function App() {
+  const auth = getAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,9 +16,7 @@ function App() {
   })
 
   function registerAuthObserver() {
-    app.auth().onAuthStateChanged(
-        (user) => changeLoginState(!!user)
-    );
+    onAuthStateChanged(auth, (user) => changeLoginState(!!user));
   }
 
   function changeLoginState(loginState) {
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      {view}  
+      {view}
     </div>
   );
 }

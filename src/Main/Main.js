@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import firebase from 'firebase';
+import { getAuth } from 'firebase/auth';
 import * as notification from '../notification';
 
 function Main() {
+  const auth = getAuth();
+
   const [userMessage, setUserMessage] = useState('');
   const [uid, setUID] = useState(null);
 
   function remindUser() {
     notification.subscribeUser(uid)
       .then(message => {
-        console.log(message)
         setUserMessage(message);
       })
       .catch(err => {
@@ -18,7 +19,7 @@ function Main() {
   }
 
   function setUidForLoggedInUser() {
-    setUID(firebase.auth().currentUser.uid);
+    setUID(auth.currentUser.uid);
   }
 
   useEffect(() => {
@@ -27,11 +28,11 @@ function Main() {
 
   return (
     <div>
-      <h1>Main Page</h1>
-      <p>Welcome {firebase.auth().currentUser.displayName}!</p>
+      <h1>MEMENTO MORI</h1>
+      <p>Hello, {auth.currentUser.displayName}!</p>
       <p>{userMessage}</p>
       <button onClick={remindUser}>Remind Me</button>
-      <button onClick={() => firebase.auth().signOut()}>Sign-out</button>
+      <button onClick={() => auth.signOut()}>Sign Out</button>
     </div>
   );
 }

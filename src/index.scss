@@ -5,4 +5,43 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   font-family: Arial, sans-serif;
+  background-color: $neutralDark;
+}
+
+h1 {
+  color: #FFF;
+  font-size: 3em;
+  font-family: 'Carter One', cursive;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+}
+
+button {
+  background-color: $primary;
+  color: #FFF;
+  font-size: 1.5em;
+  border: none;
+  display: block;
+  margin: 20px auto;
+  padding: 10px 30px;
+  min-width: 250px;
+
+  &:active {
+    background-color: $primaryLight;
+  }
+}
+
+.skull-img {
+  display: block;
+  margin: 40px auto;
+  height: 400px;
+}
+
+.subtitle {
+  margin: 10px auto;
+  width: 80%;
 }
