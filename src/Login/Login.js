@@ -11,7 +11,6 @@ function Login() {
 
   return (
     <main>
-      <h1>Memento Mori</h1>
       <p className="subtitle">Subscribe to notifications that reminder you that life is short.</p>
       <p className="subtitle">Login to subscribe.</p>
 

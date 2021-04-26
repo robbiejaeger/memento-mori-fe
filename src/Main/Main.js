@@ -28,7 +28,6 @@ function Main() {
 
   return (
     <div>
-      <h1>MEMENTO MORI</h1>
       <p>Hello, {auth.currentUser.displayName}!</p>
       <p>{userMessage}</p>
       <button onClick={remindUser}>Remind Me</button>
