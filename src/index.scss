@@ -26,6 +26,10 @@ p {
   width: 80%;
 }
 
+.status-msg {
+  color: $primaryLight;
+}
+
 button {
   background-color: $primary;
   color: #FFF;
@@ -48,7 +52,7 @@ button {
 }
 
 .skull-cutoff-img {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-left: 50%;
   transform: translateX(-50%);
   height: 700px;
