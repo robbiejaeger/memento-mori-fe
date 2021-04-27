@@ -32,6 +32,8 @@ function Main() {
       <p>{userMessage}</p>
       <button onClick={remindUser}>Remind Me</button>
       <button onClick={() => auth.signOut()}>Sign Out</button>
+
+      <img className="skull-cutoff-img" src="./skull.png" alt="skull" />
     </div>
   );
 }

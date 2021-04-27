@@ -22,6 +22,8 @@ h3 {
 p {
   color: #FFF;
   font-family: 'Roboto', sans-serif;
+  margin: 10px auto;
+  width: 80%;
 }
 
 button {
@@ -39,13 +41,15 @@ button {
   }
 }
 
-.skull-img {
+.skull-full-img {
   display: block;
   margin: 40px auto;
   height: 400px;
 }
 
-.subtitle {
-  margin: 10px auto;
-  width: 80%;
+.skull-cutoff-img {
+  margin-top: 50px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: 700px;
 }
