@@ -1,12 +1,12 @@
 import React from 'react';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 
 function Login() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
 
   const signInWithGoogle = () => {
-    signInWithPopup(auth, provider);
+    signInWithRedirect(auth, provider);
   };
 
   return (
