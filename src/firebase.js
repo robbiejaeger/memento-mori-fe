@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import { initializeApp } from "firebase/app"
 import 'firebase/auth';
 
 const firebaseConfig = {
@@ -7,6 +7,4 @@ const firebaseConfig = {
   projectId: 'memento-mori-8609a'
 };
 
-const app = firebase.initializeApp(firebaseConfig);
-
-export default app;
+initializeApp(firebaseConfig);

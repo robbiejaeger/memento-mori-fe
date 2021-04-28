@@ -1,6 +1,59 @@
+@import './shared.scss';
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   font-family: Arial, sans-serif;
+  background-color: $neutralDark;
+}
+
+h1 {
+  color: #FFF;
+  font-size: 3em;
+  font-family: 'Carter One', cursive;
+  margin-bottom: 10px;
+}
+
+h3 {
+  color: #FFF;
+}
+
+p {
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+  margin: 10px auto;
+  width: 80%;
+}
+
+.status-msg {
+  color: $primaryLight;
+}
+
+button {
+  background-color: $primary;
+  color: #FFF;
+  font-size: 1.5em;
+  border: none;
+  display: block;
+  margin: 20px auto;
+  padding: 10px 30px;
+  min-width: 250px;
+
+  &:active {
+    background-color: $primaryLight;
+  }
+}
+
+.skull-full-img {
+  display: block;
+  margin: 40px auto;
+  height: 400px;
+}
+
+.skull-cutoff-img {
+  margin-top: 30px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: 700px;
 }

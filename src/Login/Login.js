@@ -1,27 +1,22 @@
 import React from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import firebase from 'firebase';
-import app from '../firebase';
+import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 
 function Login() {
-  const uiConfig = {
-    signInFlow: 'popup',
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    ],
-    callbacks: {
-      // Avoid redirects after sign-in.
-      signInSuccessWithAuthResult: () => false
-    }
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  const signInWithGoogle = () => {
+    signInWithRedirect(auth, provider);
   };
 
   return (
     <main>
-      <h1>Memento Mori</h1>
+      <p>Subscribe to notifications that reminder you that life is short.</p>
+      <p>Login to subscribe.</p>
 
-      <section>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={app.auth()}/>
-      </section>
+      <button onClick={signInWithGoogle}>Login with Google</button>
+
+      <img className="skull-full-img" src="./skull.png" alt="skull" />
     </main>
   );
 }

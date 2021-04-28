@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
-import app from '../firebase';
 import Login from '../Login/Login';
 import Main from '../Main/Main';
-import Loader from '../Loader/Loader';
+
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
+  const auth = getAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -13,27 +14,27 @@ function App() {
     registerAuthObserver();
   })
 
-  function registerAuthObserver() {
-    app.auth().onAuthStateChanged(
-        (user) => changeLoginState(!!user)
-    );
+  const registerAuthObserver = () => {
+    onAuthStateChanged(auth, (user) => changeLoginState(!!user));
   }
 
-  function changeLoginState(loginState) {
+  const changeLoginState = loginState => {
     setIsLoggedIn(loginState);
     setIsLoading(false)
   }
 
   let view;
   if (isLoading) {
-    view = <Loader />;
+    view = <h3>Loading...</h3>;
   } else {
     view = isLoggedIn ? <Main /> : <Login />;
   }
 
   return (
     <div className="App">
-      {view}  
+      <h1>MEMENTO MORI</h1>
+
+      {view}
     </div>
   );
 }
